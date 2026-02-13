@@ -84,12 +84,12 @@ norm_likelihood <- function(outcome, input, parameter) {
 norm_likelihood2 <- function(outcome, input, parameter) {
   n <- ncol(input)
   beta <- parameter[1:n]
-  sigma <- sqrt(parameter[1+n])
+  sigma <- parameter[1+n]
   -sum(dnorm(outcome, input %*% beta, sigma, log=TRUE))
 }
 # print our estimated coefficients (intercept and beta_1)
 results_norm <- optim(fn=norm_likelihood, outcome=y_norm, input=cbind(1, X), par=c(1,1,1), hessian=T, method="BFGS")
-results_norm2 <- optim(fn=norm_likelihood, outcome=y_norm, input=cbind(1, X), par=c(1,1,1), hessian=T, method="BFGS")
+results_norm2 <- optim(fn=norm_likelihood2, outcome=y_norm, input=cbind(1, X), par=c(1,1,1), hessian=T, method="BFGS")
 # print our estimated coefficients (intercept and beta_1)
 # get same results regardless of which log-likelihood function we use
 results_norm$par; results_norm2$par
