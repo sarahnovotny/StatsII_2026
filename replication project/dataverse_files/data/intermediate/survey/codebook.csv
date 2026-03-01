@@ -1,0 +1,98 @@
+Variable,Value,Label Type,Label
+accuracy,,variable label,"To the best of your knowledge, how accurate is the claim in the above headline?"
+accuracy,1,value label,Not at all accurate
+accuracy,2,value label,Not very accurate
+accuracy,3,value label,Somewhat accurate
+accuracy,4,value label,Very accurate
+accuracy_binary,,variable label,Indicates whether a headline was deemed more or less accurate
+accuracy_binary,0,value label,Not at all accurate or Not very accurate
+accuracy_binary,1,value label,Somewhat accurate or Very accurate
+accuracy_order,,variable label,Order in which accuracy question appeared
+accuracy_order,0,value label,Accuracy question second
+accuracy_order,1,value label,Accuracy question first
+age,,variable label,Age in years
+aligned,,variable label,"Indicates whether party ID and headline orientation are aligned (i.e., Democrat party ID and pro-Democrat headline, or Republican party ID and pro-Republican headline)"
+aligned,0,value label,No
+aligned,1,value label,Yes
+censorship,,variable label,Imagine that the social media platform removed this headline. Would you use the word “censorship” to describe this action?
+censorship,0,value label,No
+censorship,1,value label,Yes
+education,,variable label,Education -- categorical
+education,1,value label,No high school diploma or GED
+education,2,value label,High school graduate
+education,3,value label,Some college or Associate degree
+education,4,value label,Bachelor's degree
+education,5,value label,Master's degree or above
+gender,,variable label,Gender
+gender,0,value label,Male
+gender,1,value label,Female
+harm,,variable label,"Some social media platforms allow users to report content as harmful. If you have the option of anonymously reporting this content as harmful, would you click the ""report as harmful content"" button for the above headline?"
+harm,0,value label,No
+harm,1,value label,Yes
+headline,,variable label,Headline that participants saw
+headline,headline_pro_dem_1,value label,https://surveys.ipsossay.com/ControlPanel/Graphic.php?IM=IM_erGziE6XnUAT4pw
+headline,headline_pro_dem_2,value label,https://surveys.ipsossay.com/ControlPanel/Graphic.php?IM=IM_5jQtyIBrkKERNzM
+headline,headline_pro_dem_3,value label,https://surveys.ipsossay.com/ControlPanel/Graphic.php?IM=IM_ePVUruXfmMbkJhA
+headline,headline_pro_dem_4,value label,https://surveys.ipsossay.com/ControlPanel/Graphic.php?IM=IM_0IpLlAeIyHZodUi
+headline,headline_pro_dem_5,value label,https://surveys.ipsossay.com/ControlPanel/Graphic.php?IM=IM_6Qmzc7eol5vTvMi
+headline,headline_pro_dem_6,value label,https://surveys.ipsossay.com/ControlPanel/Graphic.php?IM=IM_dcCLc8Ga55AaYzc
+headline,headline_pro_dem_7,value label,https://surveys.ipsossay.com/ControlPanel/Graphic.php?IM=IM_8Dnr3Surzxk3pP0
+headline,headline_pro_dem_8,value label,https://surveys.ipsossay.com/ControlPanel/Graphic.php?IM=IM_4MDYXXlUJJxc1E2
+headline,headline_pro_dem_9,value label,https://surveys.ipsossay.com/ControlPanel/Graphic.php?IM=IM_3OfNbLLsN2NzFCS
+headline,headline_pro_rep_1,value label,https://surveys.ipsossay.com/ControlPanel/Graphic.php?IM=IM_3gVnSn1U4mwhEjk
+headline,headline_pro_rep_2,value label,https://surveys.ipsossay.com/ControlPanel/Graphic.php?IM=IM_2ox2dINPLXixYcS
+headline,headline_pro_rep_3,value label,https://surveys.ipsossay.com/ControlPanel/Graphic.php?IM=IM_0Gth87cjXjTBqHc
+headline,headline_pro_rep_4,value label,https://surveys.ipsossay.com/ControlPanel/Graphic.php?IM=IM_1LYlSNANFhccgjI
+headline,headline_pro_rep_5,value label,https://surveys.ipsossay.com/ControlPanel/Graphic.php?IM=IM_1yJzElXjQmL4PzM
+headline,headline_pro_rep_6,value label,https://surveys.ipsossay.com/ControlPanel/Graphic.php?IM=IM_3n52QFm7tKt1jJc
+headline,headline_pro_rep_7,value label,https://surveys.ipsossay.com/ControlPanel/Graphic.php?IM=IM_8v8TRmPUUWobIa2
+headline,headline_pro_rep_8,value label,https://surveys.ipsossay.com/ControlPanel/Graphic.php?IM=IM_eFBTC9BblzOu95s
+headline,headline_pro_rep_9,value label,https://surveys.ipsossay.com/ControlPanel/Graphic.php?IM=IM_a5lNSP8WRWOY2A6
+headline_order,,variable label,Whether participants saw a headline in the first or second round
+headline_order,0,value label,First headline display
+headline_order,1,value label,Second headline display
+headline_orientation,,variable label,Whether a headline is pro-Democrat or pro-Republican
+headline_orientation,pro_dem,value label,pro-Democrat
+headline_orientation,pro_rep,value label,pro-Republican
+headline_pro_dem,,variable label,Indicates whether a headline is favorable for Democrats or unfavorable for Republicans
+headline_pro_dem,0,value label,No
+headline_pro_dem,1,value label,Yes
+headline_pro_rep,,variable label,Indicates whether a headline is favorable for Republicans or unfavorable for Democrats
+headline_pro_rep,0,value label,No
+headline_pro_rep,1,value label,Yes
+hispanic,,variable label,Hispanic ethnicity indicator
+hispanic,0,value label,No
+hispanic,1,value label,Yes
+household_income,,variable label,Household Income
+household_income,1,value label,"Under $10,000"
+household_income,2,value label,"$10,000 to $24,999"
+household_income,3,value label,"$25,000 to $49,999"
+household_income,4,value label,"$50,000 to $74,999"
+household_income,5,value label,"$75,000 to $99,999"
+household_income,6,value label,"$100,000 to $149,999"
+household_income,7,value label,"$150,000 or more"
+id,,variable label,Participant ID
+party_id,,variable label,Party identification
+party_id_dem,,variable label,Democrat party ID indicator
+party_id_dem,0,value label,No
+party_id_dem,1,value label,Yes
+party_id_rep,,variable label,Republican party ID indicator
+party_id_rep,0,value label,No
+party_id_rep,1,value label,Yes
+political_interest,,variable label,"Political interest. Average of national politics, state politics, local politics, and international politics news consumption, each measured on a 4-point scale from 1 (Not at all closely) to 4 (Very closely)"
+race,,variable label,Race
+race,Non-White,value label,Non-White
+race,White,value label,White
+remove,,variable label,How do you think the social media company should handle this headline?
+remove,0,value label,Allow it to remain on the social media site
+remove,1,value label,Remove it from the social media site
+social_media_most_common_newsformat,,variable label,"Indicates whether ""From social media"" was chosen in response to ""In which format do you get most of your news?"""
+social_media_most_common_newsformat,0,value label,No
+social_media_most_common_newsformat,1,value label,Yes
+social_media_post_flagged,,variable label,"Have you ever experienced the following? - Had a social media post flagged, reported, or tagged with a warning label."
+social_media_post_flagged,0,value label,"No, I have not experienced or done this"
+social_media_post_flagged,1,value label,"Yes, I have experienced or done this"
+social_media_post_removed,,variable label,Have you ever experienced the following? - Had a social media post removed by the social media company.
+social_media_post_removed,0,value label,"No, I have not experienced or done this"
+social_media_post_removed,1,value label,"Yes, I have experienced or done this"
+weight,,variable label,Survey weight

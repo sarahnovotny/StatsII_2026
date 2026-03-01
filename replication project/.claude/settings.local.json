@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep:*)",
+      "Bash(cd \"/Users/sarahnovotny/Github/StatsII_2026/replication project\" && jupyter nbconvert --to notebook --execute --ExecutePreprocessor.timeout=600 notebooks/05_heterogeneous_effects.ipynb --output 05_heterogeneous_effects_executed.ipynb 2>&1)",
+      "Bash(which python3 && python3 -m jupyter --version 2>&1 || python3 -c \"import jupyter; print\\('jupyter found'\\)\" 2>&1)",
+      "Bash(source /Users/sarahnovotny/Github/python3.12-venv/bin/activate && cd \"/Users/sarahnovotny/Github/StatsII_2026/replication project\" && jupyter nbconvert --to notebook --execute --ExecutePreprocessor.timeout=600 notebooks/06_logit_comparison.ipynb --output 06_logit_comparison_executed.ipynb 2>&1)"
+    ]
+  }
+}
