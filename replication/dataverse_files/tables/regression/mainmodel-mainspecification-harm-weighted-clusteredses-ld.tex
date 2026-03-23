@@ -1,0 +1,56 @@
+
+
+
+\begin{table}[!htpb]
+\caption{Regression of Intent to Report Headline as Harmful on Partisanship and Alignment}
+\begin{center}
+\scalebox{0.8}{
+\begin{tabular}{l c c c c}
+\hline
+ & \multicolumn{4}{c}{DV: Intent to Report Headline as Harmful}\\
+\cline{2-5}
+ & \multicolumn{2}{c}{All} & \multicolumn{2}{c}{Inaccurate Subgroup} \\
+\cline{2-3} \cline{4-5}
+ & Baseline & Controls & Baseline & Controls \\
+\hline
+Democrat                             & $0.56^{***}$  & $0.55^{***}$    & $0.57^{***}$  & $0.58^{***}$    \\
+                                     & $(0.02)$      & $(0.10)$        & $(0.02)$      & $(0.12)$        \\
+Republican                           & $0.25^{***}$  & $0.26^{**}$     & $0.30^{***}$  & $0.32^{**}$     \\
+                                     & $(0.02)$      & $(0.09)$        & $(0.03)$      & $(0.11)$        \\
+Democrat x Pro-Democrat Headline     & $-0.13^{***}$ & $-0.11^{***}$   & $-0.11^{***}$ & $-0.08^{*}$     \\
+                                     & $(0.03)$      & $(0.03)$        & $(0.03)$      & $(0.03)$        \\
+Republican x Pro-Republican Headline & $0.03$        & $0.04$          & $0.02$        & $0.02$          \\
+                                     & $(0.03)$      & $(0.03)$        & $(0.03)$      & $(0.04)$        \\
+Age                                  &               & $0.00^{**}$     &               & $0.00^{**}$     \\
+                                     &               & $(0.00)$        &               & $(0.00)$        \\
+Gender: Female                       &               & $-0.06^{\cdot}$ &               & $-0.05$         \\
+                                     &               & $(0.03)$        &               & $(0.04)$        \\
+Education                            &               & $-0.01$         &               & $-0.02$         \\
+                                     &               & $(0.02)$        &               & $(0.02)$        \\
+Hispanic                             &               & $-0.01$         &               & $0.04$          \\
+                                     &               & $(0.05)$        &               & $(0.05)$        \\
+Race: Non-White                      &               & $0.04$          &               & $0.04$          \\
+                                     &               & $(0.04)$        &               & $(0.04)$        \\
+Household Income                     &               & $-0.00$         &               & $-0.01$         \\
+                                     &               & $(0.01)$        &               & $(0.01)$        \\
+Political Interest                   &               & $-0.04$         &               & $-0.02$         \\
+                                     &               & $(0.02)$        &               & $(0.03)$        \\
+Social Media Most Common News Format &               & $0.04$          &               & $0.04$          \\
+                                     &               & $(0.04)$        &               & $(0.05)$        \\
+Social Media Post Flagged            &               & $-0.03$         &               & $-0.03$         \\
+                                     &               & $(0.05)$        &               & $(0.06)$        \\
+Social Media Post Removed            &               & $-0.10^{\cdot}$ &               & $-0.12^{\cdot}$ \\
+                                     &               & $(0.05)$        &               & $(0.07)$        \\
+\hline
+R$^2$                                & $0.42$        & $0.42$          & $0.46$        & $0.46$          \\
+Adj. R$^2$                           & $0.42$        & $0.41$          & $0.46$        & $0.45$          \\
+Num. obs.                            & $2192$        & $1692$          & $1720$        & $1347$          \\
+RMSE                                 & $0.47$        & $0.46$          & $0.47$        & $0.47$          \\
+N Clusters                           & $1105$        & $851$           & $1005$        & $785$           \\
+\hline
+\multicolumn{5}{l}{\scriptsize{$^{***}p<0.001$; $^{**}p<0.01$; $^{*}p<0.05$; $^{\cdot}p<0.1$}}
+\end{tabular}
+}
+\label{tab:mainmodel-mainspecification-harm-weighted-clusteredses-ld}
+\end{center}
+\end{table}

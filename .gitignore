@@ -38,3 +38,25 @@ Temporary Items
 
 # Graded problem sets
 *_graded.pdf
+
+# PowerPoint files
+*.pptx
+
+# LaTeX build artifacts
+*.aux
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.bbl
+*.blg
+*.nav
+*.snm
+*.vrb
+
+# Claude Code
+.claude/

@@ -1,0 +1,40 @@
+
+
+
+\begin{table}[!htpb]
+\caption{Regression of Intent to Remove Headline on Partisanship and Alignment}
+\begin{center}
+\scalebox{0.6}{
+\begin{tabular}{l c c c}
+\hline
+ & \multicolumn{3}{c}{DV: Intent to Remove Headline} \\
+\cline{2-4}
+ & Accuracy Question First & Accuracy Question Second & Accuracy Question Order Interaction \\
+\hline
+Democrat                                                       & $0.76^{***}$ & $0.80^{***}$ & $0.80^{***}$ \\
+                                                               & $(0.04)$     & $(0.04)$     & $(0.04)$     \\
+Republican                                                     & $0.36^{***}$ & $0.40^{***}$ & $0.40^{***}$ \\
+                                                               & $(0.05)$     & $(0.05)$     & $(0.04)$     \\
+Democrat x Pro-Democrat Headline                               & $-0.07$      & $-0.16^{**}$ & $-0.16^{**}$ \\
+                                                               & $(0.06)$     & $(0.06)$     & $(0.06)$     \\
+Republican x Pro-Republican Headline                           & $0.03$       & $-0.08$      & $-0.08$      \\
+                                                               & $(0.07)$     & $(0.08)$     & $(0.07)$     \\
+Accuracy Question First                                        &              &              & $-0.04$      \\
+                                                               &              &              & $(0.05)$     \\
+Accuracy Question First x Democrat x Pro-Democrat Headline     &              &              & $0.09$       \\
+                                                               &              &              & $(0.08)$     \\
+Accuracy Question First x Republican x Pro-Republican Headline &              &              & $0.11$       \\
+                                                               &              &              & $(0.09)$     \\
+\hline
+R$^2$                                                          & $0.60$       & $0.63$       & $0.61$       \\
+Adj. R$^2$                                                     & $0.60$       & $0.62$       & $0.61$       \\
+Num. obs.                                                      & $565$        & $531$        & $1096$       \\
+RMSE                                                           & $0.46$       & $0.46$       & $0.46$       \\
+N Clusters                                                     & $565$        & $531$        & $1096$       \\
+\hline
+\multicolumn{4}{l}{\scriptsize{$^{***}p<0.001$; $^{**}p<0.01$; $^{*}p<0.05$; $^{\cdot}p<0.1$}}
+\end{tabular}
+}
+\label{tab:tripleinteraction-mainspecification-remove-weighted-clusteredses-ld}
+\end{center}
+\end{table}

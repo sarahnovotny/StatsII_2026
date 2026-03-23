@@ -1,0 +1,40 @@
+
+
+
+\begin{table}[!htpb]
+\caption{Regression of Perception of Headline Removal as Censorship on Partisanship and Alignment}
+\begin{center}
+\scalebox{0.6}{
+\begin{tabular}{l c c c}
+\hline
+ & \multicolumn{3}{c}{DV: Perception of Headline Removal as Censorship} \\
+\cline{2-4}
+ & Accuracy Question First & Accuracy Question Second & Accuracy Question Order Interaction \\
+\hline
+Democrat                                                       & $0.28^{***}$ & $0.32^{***}$ & $0.32^{***}$ \\
+                                                               & $(0.05)$     & $(0.05)$     & $(0.05)$     \\
+Republican                                                     & $0.61^{***}$ & $0.62^{***}$ & $0.63^{***}$ \\
+                                                               & $(0.06)$     & $(0.06)$     & $(0.05)$     \\
+Democrat x Pro-Democrat Headline                               & $0.04$       & $-0.07$      & $-0.06$      \\
+                                                               & $(0.07)$     & $(0.07)$     & $(0.07)$     \\
+Republican x Pro-Republican Headline                           & $0.06$       & $0.10$       & $0.09$       \\
+                                                               & $(0.08)$     & $(0.08)$     & $(0.07)$     \\
+Accuracy Question First                                        &              &              & $-0.03$      \\
+                                                               &              &              & $(0.05)$     \\
+Accuracy Question First x Democrat x Pro-Democrat Headline     &              &              & $0.09$       \\
+                                                               &              &              & $(0.09)$     \\
+Accuracy Question First x Republican x Pro-Republican Headline &              &              & $-0.03$      \\
+                                                               &              &              & $(0.09)$     \\
+\hline
+R$^2$                                                          & $0.54$       & $0.55$       & $0.54$       \\
+Adj. R$^2$                                                     & $0.53$       & $0.55$       & $0.54$       \\
+Num. obs.                                                      & $455$        & $432$        & $887$        \\
+RMSE                                                           & $0.46$       & $0.46$       & $0.46$       \\
+N Clusters                                                     & $455$        & $432$        & $887$        \\
+\hline
+\multicolumn{4}{l}{\scriptsize{$^{***}p<0.001$; $^{**}p<0.01$; $^{*}p<0.05$; $^{\cdot}p<0.1$}}
+\end{tabular}
+}
+\label{tab:tripleinteraction-mainspecification-censorship-weighted-clusteredses-ld}
+\end{center}
+\end{table}

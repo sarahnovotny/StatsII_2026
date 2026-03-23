@@ -1,0 +1,233 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{natbib}
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage{xcolor}
+\usepackage{listings}
+
+\lstset{
+  basicstyle=\ttfamily\small,
+  breaklines=true,
+  frame=single,
+  backgroundcolor=\color{gray!10}
+}
+
+% Allow line breaks at underscores in \texttt
+\renewcommand\_{\textunderscore\hspace{0pt}}
+
+\title{Replication and Extension:\\
+\textit{Partisan Conflict over Content Moderation\\Is More Than Disagreement about Facts}}
+\author{Sarah Novotny\\
+POU7003 Applied Statistics II\\
+Trinity College Dublin}
+\date{Spring 2026}
+
+\begin{document}
+\maketitle
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Introduction}
+
+This report documents the replication and methodological extension of Appel, Pan, and Roberts (2023), ``Partisan conflict over content moderation is more than disagreement about facts,'' published in \textit{Science Advances}. The original study investigates whether partisan disagreements about social media content moderation persist even when partisans agree on the factual accuracy of news headlines.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{The Original Experiment}
+
+\subsection{Design}
+The study uses a survey experiment with 1{,}120 U.S.\ respondents (673 Democrats, 447 Republicans). Each respondent evaluates two political news headlines---one pro-Democrat and one pro-Republican---on three binary outcomes:
+\begin{enumerate}[nosep]
+  \item \textbf{Remove}: Whether the headline should be removed from social media
+  \item \textbf{Harm}: Whether the headline should be reported as harmful
+  \item \textbf{Censorship}: Whether removing the headline would constitute censorship
+\end{enumerate}
+
+The key design feature is that headlines are crossed with party affiliation, creating \textit{aligned} (co-partisan) and \textit{misaligned} (cross-partisan) conditions. This allows the authors to measure ``party promotion''---the tendency to treat co-partisan content more favourably.
+
+\subsection{Core Models}
+The authors estimate linear probability models (LPM) via weighted least squares with cluster-robust standard errors (clustered on respondent):
+\begin{equation}
+\text{outcome}_i = \beta_D D_i + \beta_R R_i + \gamma_D (D_i \times \text{ProDem}_i) + \gamma_R (R_i \times \text{ProRep}_i) + \varepsilon_i
+\end{equation}
+where $D_i$ and $R_i$ are party indicators (no intercept), and the interaction terms $\gamma_D$, $\gamma_R$ capture partisan promotion effects. Survey weights are applied throughout.
+
+\subsection{Key Findings}
+Large partisan gaps in content moderation preferences persist even when respondents agree a headline is inaccurate. Democrats are approximately 35 percentage points more likely to favour headline removal than Republicans, and this gap is not explained by disagreements about factual accuracy.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{The Twist: LPM vs.\ Logistic Regression}
+
+\subsection{Motivation}
+The original paper uses the linear probability model throughout. While LPM is standard in political science and economics for its interpretability (coefficients are directly in percentage-point units), it has a well-known limitation: predicted probabilities can fall outside $[0, 1]$. Logistic regression (GLM with binomial family and logit link) respects these bounds by construction.
+
+This extension re-estimates the core models using logistic regression and compares:
+\begin{itemize}[nosep]
+  \item LPM coefficients vs.\ logit average marginal effects (AMEs)
+  \item Predicted probabilities under both specifications
+  \item Boundary violations in the LPM fitted values
+  \item Odds ratios from the logistic model
+\end{itemize}
+
+\subsection{Average Marginal Effects}
+Because logit coefficients are in log-odds units, direct comparison with LPM requires computing average marginal effects. For each party promotion term, the AME is computed via finite differences:
+\[
+\text{AME} = \frac{1}{N_{\text{party}}} \sum_{i \in \text{party}} \left[\hat{P}(Y_i = 1 \mid X_{i,\text{treat}}=1) - \hat{P}(Y_i = 1 \mid X_{i,\text{treat}}=0)\right]
+\]
+Standard errors are obtained via cluster bootstrap (200 iterations, resampling respondent clusters).
+
+\subsection{Key Results}
+
+\begin{table}[H]
+\centering
+\caption{LPM Coefficients vs.\ Logit AMEs for Party Promotion Terms}
+\label{tab:comparison}
+\begin{tabular}{llrrrr}
+\toprule
+Outcome & Term & LPM Coef & LPM SE & Logit AME & AME SE \\
+\midrule
+Remove & Dem $\times$ Pro-Dem & $-0.110$ & 0.023 & $-0.110$ & 0.024 \\
+Remove & Rep $\times$ Pro-Rep & $0.002$ & 0.023 & $0.002$ & 0.023 \\
+Harm & Dem $\times$ Pro-Dem & $-0.130$ & 0.027 & $-0.130$ & 0.028 \\
+Harm & Rep $\times$ Pro-Rep & $0.033$ & 0.027 & $0.033$ & 0.026 \\
+Censorship & Dem $\times$ Pro-Dem & $0.013$ & 0.020 & $0.013$ & 0.020 \\
+Censorship & Rep $\times$ Pro-Rep & $-0.002$ & 0.027 & $-0.002$ & 0.025 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The LPM coefficients and logit AMEs are virtually identical across all outcomes. This is expected for the base specification, which is saturated (4~parameters for 4~party-by-alignment cells). When demographic controls are added (making the model non-saturated), the two approaches diverge slightly but remain substantively identical, with differences typically under 1~percentage point.
+
+The sign and statistical significance of all party promotion terms are consistent across both methods, confirming that the paper's core findings are robust to the choice of estimation method.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Replication Process}
+
+\subsection{Original R Replication}
+The authors provide three R~scripts that generate all figures and tables: \texttt{manuscript\_code.R}, \texttt{final\_models.R}, and \texttt{functions.R}.
+Running these with current packages required two fixes:
+
+\paragraph{The \texttt{ggbrace} compatibility issue.}
+The original code uses \texttt{geom\_brace()} from the \texttt{ggbrace} package (v0.1.0) to draw curly-brace annotations on descriptive bar charts. Current versions of \texttt{ggbrace} ($\geq$0.1.2) have removed this function, replacing it with \texttt{stat\_brace()}/\texttt{stat\_bracetext()} which use a different calling convention. Additionally, the old \texttt{geom\_brace()} is incompatible with \texttt{ggplot2} 4.x due to the new S7 object system.
+
+The solution was a \textbf{compatibility shim}: a wrapper function added to \texttt{manuscript\_code.R} that translates the original \texttt{geom\_brace()} API calls into the new \texttt{stat\_brace()}\slash\texttt{stat\_bracetext()} interface. This preserves the original code unchanged while working with current package versions. The shim handles both calling conventions used in the manuscript: the faceted descriptive charts (with \texttt{data}, \texttt{aes()}, and \texttt{label} arguments) and the simpler coefficient plot braces.
+
+\paragraph{Missing output directories.}
+The script writes to a \texttt{figures/paper/} subdirectory not listed in the README's directory structure. Creating this directory resolved the only other runtime error.
+
+\subsection{The R Twist Script}
+The logistic regression comparison was also implemented as an R~script (\texttt{twist\_logit\_comparison.R}) that sources the original replication infrastructure and adds logit estimation, finite-difference AMEs with cluster bootstrap, predicted probabilities with controls, boundary checks, and an inaccurate-subgroup comparison.
+
+\subsection{Parallel Python Reproduction}
+In parallel with the R replication, a complete Python reproduction was built across six Jupyter notebooks using \texttt{statsmodels}, \texttt{pandas}, and \texttt{matplotlib}:
+\begin{enumerate}[nosep]
+  \item \textbf{01}: Data exploration and descriptive statistics
+  \item \textbf{02}: Main OLS regressions and coefficient plots
+  \item \textbf{03}: Robustness checks (controls, multiple imputation, consensus headlines)
+  \item \textbf{04}: Mediation analysis with sensitivity
+  \item \textbf{05}: Heterogeneous treatment effects (triple interactions)
+  \item \textbf{06}: LPM vs.\ logistic regression comparison
+\end{enumerate}
+
+Notebooks 01--04 replicate the paper's core results. Notebooks 05--06 are original extensions. Key design choices in the Python implementation:
+\begin{itemize}[nosep]
+  \item A shared \texttt{utils.py} module provides \texttt{fit\_ols\_clustered()}, \texttt{fit\_glm\_clustered()}, \texttt{pool\_mi\_results()} (Rubin's rules), and plotting functions
+  \item Statsmodels' \texttt{SpecificationWarning} about \texttt{var\_weights} with cluster-robust SEs was investigated and suppressed with documentation---the sandwich estimator is mathematically identical to the well-tested WLS case
+  \item Python's CR1 clustering produces SEs 1--3\% smaller than R's CR2 (\texttt{estimatr}), reflecting different finite-sample corrections
+\end{itemize}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Conclusion}
+
+The replication confirms all core findings of Appel, Pan, and Roberts (2023). The methodological twist---comparing linear probability models to logistic regression---demonstrates that the paper's results are robust to the choice of estimation method.
+
+For this application, LPM and logit produce substantively identical conclusions because:
+\begin{enumerate}[nosep]
+  \item The base model is \textbf{saturated} (4 parameters for 4 cells), so both methods reproduce the exact cell means regardless of link function
+  \item Even with controls (non-saturated models), predicted probabilities differ by less than 1~percentage point
+  \item The outcomes have base rates in the 25--75\% range where the logistic and linear link functions are nearly parallel
+  \item Boundary violations in the LPM are minimal with this simple specification
+\end{enumerate}
+
+The logistic model does offer an additional interpretive lens through odds ratios: Democrats have 0.60 times the odds of wanting to remove a co-partisan headline (compared to a cross-partisan one), while Republican party promotion is small and statistically insignificant (OR $\approx$ 1.01). These multiplicative effects complement the additive LPM interpretation without changing the substantive conclusions.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Reproduction Dependencies}
+
+\subsection{R Environment}
+The R replication was executed with R~4.5.3. Required packages:
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{lll}
+\toprule
+Package & Version & Purpose \\
+\midrule
+\texttt{tidyverse} & 2.0.0 & Data wrangling and plotting \\
+\texttt{ggplot2} & 4.0.2 & Plotting (with ggbrace shim) \\
+\texttt{estimatr} & 1.0.4 & Cluster-robust regression \\
+\texttt{texreg} & 1.39.5 & Regression table formatting \\
+\texttt{mice} & 3.17.0 & Multiple imputation \\
+\texttt{mediation} & 4.5.1 & Causal mediation analysis \\
+\texttt{sandwich} & 3.1-1 & Robust covariance estimators \\
+\texttt{lmtest} & 0.9-40 & Coefficient testing \\
+\texttt{ggbrace} & 0.1.2 & Brace annotations (with shim) \\
+\texttt{spatstat} & 3.5-1 & Weighted median \\
+\texttt{gt} & 0.11.1 & Table formatting \\
+\texttt{haven} / \texttt{sjlabelled} & --- & Label handling \\
+\texttt{readxl} & --- & Excel file reading \\
+\texttt{patchwork} & --- & Plot composition \\
+\texttt{tableone} & --- & Balance tables \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Python Environment}
+The Python notebooks were executed with Python~3.12 in a virtual environment. Required packages (see \texttt{requirements.txt}):
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{lll}
+\toprule
+Package & Version & Purpose \\
+\midrule
+\texttt{numpy} & $\geq$1.24 & Numerical computation \\
+\texttt{pandas} & $\geq$2.0 & Data manipulation \\
+\texttt{statsmodels} & $\geq$0.14 & OLS, GLM, clustering \\
+\texttt{scipy} & $\geq$1.10 & Statistical distributions \\
+\texttt{matplotlib} & $\geq$3.7 & Plotting \\
+\texttt{seaborn} & $\geq$0.12 & Statistical visualisation \\
+\texttt{jupyter} / \texttt{nbconvert} & --- & Notebook execution \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section*{AI Use Declaration}
+
+This project made extensive use of Claude Code (Anthropic's Claude Opus~4.6, 1M context) as a coding assistant. Claude Code was used for:
+\begin{itemize}[nosep]
+  \item Writing the Python reproduction notebooks (\texttt{utils.py}, Notebooks 01--06)
+  \item Debugging the \texttt{ggbrace} compatibility issue and writing the shim
+  \item Creating the R twist script (\texttt{twist\_logit\_comparison.R})
+  \item Diagnosing the saturated-model identity in predicted probabilities
+  \item Drafting and formatting this \LaTeX\ writeup
+\end{itemize}
+
+All code was reviewed, tested, and verified by the author. Statistical interpretations and methodological choices (e.g., the decision to compare AMEs rather than raw logit coefficients, the use of cluster bootstrap for AME standard errors) were informed by course material and validated against the published results. Claude Code served as a pair programmer---accelerating implementation and debugging---but did not independently make analytical decisions.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\bibliographystyle{apalike}
+\begin{thebibliography}{9}
+\bibitem{appel2023}
+Appel, R.~E., Pan, J., \& Roberts, M.~E. (2023).
+Partisan conflict over content moderation is more than disagreement about facts.
+\textit{Science Advances}, 9(41), eadg6799.
+\end{thebibliography}
+
+\end{document}

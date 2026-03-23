@@ -1,0 +1,56 @@
+
+
+
+\begin{table}[!htpb]
+\caption{Regression of Intent to Remove Headline on Partisanship and Alignment}
+\begin{center}
+\scalebox{0.8}{
+\begin{tabular}{l c c c c}
+\hline
+ & \multicolumn{4}{c}{DV: Intent to Remove Headline}\\
+\cline{2-5}
+ & \multicolumn{2}{c}{All} & \multicolumn{2}{c}{Inaccurate Subgroup} \\
+\cline{2-3} \cline{4-5}
+ & Baseline & Controls & Baseline & Controls \\
+\hline
+Democrat                             & $0.75^{***}$  & $0.79^{***}$  & $0.79^{***}$  & $0.98^{***}$    \\
+                                     & $(0.02)$      & $(0.12)$      & $(0.02)$      & $(0.13)$        \\
+Republican                           & $0.34^{***}$  & $0.37^{**}$   & $0.40^{***}$  & $0.60^{***}$    \\
+                                     & $(0.03)$      & $(0.12)$      & $(0.03)$      & $(0.14)$        \\
+Democrat x Pro-Democrat Headline     & $-0.11^{***}$ & $-0.12^{***}$ & $-0.07^{***}$ & $-0.07^{**}$    \\
+                                     & $(0.02)$      & $(0.03)$      & $(0.02)$      & $(0.02)$        \\
+Republican x Pro-Republican Headline & $0.00$        & $0.01$        & $0.03$        & $0.03$          \\
+                                     & $(0.02)$      & $(0.03)$      & $(0.03)$      & $(0.03)$        \\
+Age                                  &               & $0.00$        &               & $0.00$          \\
+                                     &               & $(0.00)$      &               & $(0.00)$        \\
+Gender: Female                       &               & $0.01$        &               & $0.00$          \\
+                                     &               & $(0.03)$      &               & $(0.04)$        \\
+Education                            &               & $-0.01$       &               & $-0.04^{\cdot}$ \\
+                                     &               & $(0.02)$      &               & $(0.02)$        \\
+Hispanic                             &               & $0.07$        &               & $0.09^{\cdot}$  \\
+                                     &               & $(0.05)$      &               & $(0.05)$        \\
+Race: Non-White                      &               & $-0.01$       &               & $0.03$          \\
+                                     &               & $(0.04)$      &               & $(0.04)$        \\
+Household Income                     &               & $-0.00$       &               & $-0.01$         \\
+                                     &               & $(0.01)$      &               & $(0.01)$        \\
+Political Interest                   &               & $-0.02$       &               & $-0.02$         \\
+                                     &               & $(0.03)$      &               & $(0.03)$        \\
+Social Media Most Common News Format &               & $0.03$        &               & $0.01$          \\
+                                     &               & $(0.05)$      &               & $(0.06)$        \\
+Social Media Post Flagged            &               & $0.01$        &               & $0.03$          \\
+                                     &               & $(0.07)$      &               & $(0.09)$        \\
+Social Media Post Removed            &               & $-0.15^{*}$   &               & $-0.21^{*}$     \\
+                                     &               & $(0.07)$      &               & $(0.09)$        \\
+\hline
+R$^2$                                & $0.58$        & $0.59$        & $0.65$        & $0.67$          \\
+Adj. R$^2$                           & $0.58$        & $0.59$        & $0.65$        & $0.67$          \\
+Num. obs.                            & $2190$        & $1691$        & $1721$        & $1349$          \\
+RMSE                                 & $0.46$        & $0.46$        & $0.45$        & $0.44$          \\
+N Clusters                           & $1104$        & $849$         & $1003$        & $783$           \\
+\hline
+\multicolumn{5}{l}{\scriptsize{$^{***}p<0.001$; $^{**}p<0.01$; $^{*}p<0.05$; $^{\cdot}p<0.1$}}
+\end{tabular}
+}
+\label{tab:mainmodel-mainspecification-remove-weighted-clusteredses-ld}
+\end{center}
+\end{table}

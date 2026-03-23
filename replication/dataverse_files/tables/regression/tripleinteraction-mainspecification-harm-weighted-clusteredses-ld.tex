@@ -1,0 +1,40 @@
+
+
+
+\begin{table}[!htpb]
+\caption{Regression of Intent to Report Headline as Harmful on Partisanship and Alignment}
+\begin{center}
+\scalebox{0.6}{
+\begin{tabular}{l c c c}
+\hline
+ & \multicolumn{3}{c}{DV: Intent to Report Headline as Harmful} \\
+\cline{2-4}
+ & Accuracy Question First & Accuracy Question Second & Accuracy Question Order Interaction \\
+\hline
+Democrat                                                       & $0.58^{***}$ & $0.68^{***}$  & $0.64^{***}$  \\
+                                                               & $(0.05)$     & $(0.04)$      & $(0.04)$      \\
+Republican                                                     & $0.30^{***}$ & $0.23^{***}$  & $0.28^{***}$  \\
+                                                               & $(0.05)$     & $(0.04)$      & $(0.04)$      \\
+Democrat x Pro-Democrat Headline                               & $-0.09$      & $-0.27^{***}$ & $-0.23^{***}$ \\
+                                                               & $(0.07)$     & $(0.06)$      & $(0.06)$      \\
+Republican x Pro-Republican Headline                           & $0.07$       & $0.02$        & $-0.02$       \\
+                                                               & $(0.07)$     & $(0.07)$      & $(0.07)$      \\
+Accuracy Question First                                        &              &               & $-0.02$       \\
+                                                               &              &               & $(0.05)$      \\
+Accuracy Question First x Democrat x Pro-Democrat Headline     &              &               & $0.09$        \\
+                                                               &              &               & $(0.08)$      \\
+Accuracy Question First x Republican x Pro-Republican Headline &              &               & $0.14$        \\
+                                                               &              &               & $(0.08)$      \\
+\hline
+R$^2$                                                          & $0.46$       & $0.49$        & $0.47$        \\
+Adj. R$^2$                                                     & $0.46$       & $0.49$        & $0.47$        \\
+Num. obs.                                                      & $566$        & $528$         & $1094$        \\
+RMSE                                                           & $0.48$       & $0.46$        & $0.47$        \\
+N Clusters                                                     & $566$        & $528$         & $1094$        \\
+\hline
+\multicolumn{4}{l}{\scriptsize{$^{***}p<0.001$; $^{**}p<0.01$; $^{*}p<0.05$; $^{\cdot}p<0.1$}}
+\end{tabular}
+}
+\label{tab:tripleinteraction-mainspecification-harm-weighted-clusteredses-ld}
+\end{center}
+\end{table}
