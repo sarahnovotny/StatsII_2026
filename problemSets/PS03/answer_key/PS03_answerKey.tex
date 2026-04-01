@@ -1,0 +1,190 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage{graphicx,textcomp}
+\usepackage{natbib}
+\usepackage{setspace}
+\usepackage{fullpage}
+\usepackage{color}
+\usepackage[reqno]{amsmath}
+\usepackage{amsthm}
+\usepackage{fancyvrb}
+\usepackage{amssymb,enumerate}
+\usepackage[all]{xy}
+\usepackage{endnotes}
+\usepackage{adjustbox}
+\usepackage{lscape}
+\newtheorem{com}{Comment}
+\usepackage{float}
+\usepackage{hyperref}
+\newtheorem{lem} {Lemma}
+\newtheorem{prop}{Proposition}
+\newtheorem{thm}{Theorem}
+\newtheorem{defn}{Definition}
+\newtheorem{cor}{Corollary}
+\usepackage{enumitem}
+\usepackage{verbatimbox}
+\newtheorem{obs}{Observation}
+\usepackage[compact]{titlesec}
+\usepackage{dcolumn}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\usepackage{multirow}
+\usepackage{xcolor}
+\newcolumntype{.}{D{.}{.}{-1}}
+\newcolumntype{d}[1]{D{.}{.}{#1}}
+\definecolor{light-gray}{gray}{0.65}
+\usepackage{url}
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+	backgroundcolor=\color{backcolour},   
+	commentstyle=\color{codegreen},
+	keywordstyle=\color{magenta},
+	numberstyle=\tiny\color{codegray},
+	stringstyle=\color{codepurple},
+	basicstyle=\footnotesize,
+	breakatwhitespace=false,         
+	breaklines=true,                 
+	captionpos=b,                    
+	keepspaces=true,                 
+	numbers=left,                    
+	numbersep=5pt,                  
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false,                  
+	tabsize=2
+}
+\lstset{style=mystyle}
+\newcommand{\Sref}[1]{Section~\ref{#1}}
+\newtheorem{hyp}{Hypothesis}
+
+\title{Answer Key: Problem Set 3}
+\date{Jeffrey Ziegler}
+\author{Applied Stats II}
+
+\begin{document}
+	\maketitle
+	
+	\section*{Instructions}
+	\begin{itemize}
+		\item \textit{Please show your work! You may lose points by simply writing in the answer. If the problem requires you to execute commands in \texttt{R}, please include the code you used to get your answers. Please also include the \texttt{.R} file that contains your code. If you are not sure if work needs to be shown for a particular problem, please ask.}
+			\item \textit{Your homework should be submitted electronically on GitHub in \texttt{.pdf} form.}
+			\item \textit{This problem set is due before 23:59 on Wednesday March 25, 2026. No late assignments will be accepted.}
+
+	\end{itemize}
+	\vspace{.25cm}
+	
+	\section*{Question 1}
+	\vspace{.25cm}
+\noindent \emph{We are interested in how governments' management of public resources impacts economic prosperity. Our data come from \href{https://www.researchgate.net/profile/Adam_Przeworski/publication/240357392_Classifying_Political_Regimes/links/0deec532194849aefa000000/Classifying-Political-Regimes.pdf}{Alvarez, Cheibub, Limongi, and Przeworski (1996)} and is labelled \texttt{gdpChange.csv} on GitHub. The dataset covers 135 countries observed between 1950 or the year of independence or the first year forwhich data on economic growth are available ("entry year"), and 1990 or the last year for which data on economic growth are available ("exit year"). The unit of analysis is a particular country during a particular year, for a total $>$ 3,500 observations. }
+
+
+\begin{enumerate}
+	\item \emph{Construct and interpret an unordered multinomial logit with \texttt{GDPWdiff} as the output and "no change" as the reference category, including the estimated cutoff points and coefficients.}\\
+	
+	First, let's load in our data and change our outcome to an unordered categorical variable in which the baseline is "no change". Then, we can estimate our unordered multinomial logit.\\
+	
+	\lstinputlisting[language=R, firstline=40, lastline=51]{PS03_answerKey.R}  
+	
+	\begin{verbnobox}[\footnotesize]
+		Coefficients:
+		(Intercept)      REG      OIL
+		negative    3.805370 1.379282 4.783968
+		positive    4.533759 1.769007 4.576321
+		
+		Residual Deviance: 4678.77 
+		AIC: 4690.77 
+	\end{verbnobox}			
+	
+\normalsize	Looking at the above output, we can see that we have essentially estimated two different regression lines in which we model the likelihood of shifting from "no change" to "negative", and "no change" to "positive". So, we can interpret the estimated coefficient for the intercept in \texttt{negative} as: when REG and OIL both = 0, the estimated log odds of going from no change to negative is $\approx$ 3.8. When we shift REG from 0 to 1 (a one unit change in $x$) there is an estimated change in log odds of going from no change to negative by  $\approx$ 1.38, holding OIL constant at the observed mean. We can then make the same statement about OIL: going from 0 to 1 coincides with an estimated change in log odds of going from no change to negative by  $\approx$ 4.78, holding REG constant at the observed mean.\\
+	
+	\item \emph{Construct and interpret an ordered multinomial logit with \texttt{GDPWdiff} as the outcome variable, including the estimated cutoff points and coefficients.}\\
+	
+	Before we run our ordered model, we need to re-order our outcome so that the categories are in increasing order (negative $\rightarrow$ no change $\rightarrow$ positive).\\
+	
+	\lstinputlisting[language=R, firstline=52, lastline=57]{PS03_answerKey.R}  
+	
+	\begin{verbnobox}[\footnotesize]
+		Coefficients:
+		Value Std. Error t value
+		REG  0.3985    0.07518   5.300
+		OIL -0.1987    0.11572  -1.717
+		
+		Intercepts:
+		Value    Std. Error t value 
+		negative|no change  -0.7312   0.0476   -15.3597
+		no change|positive  -0.7105   0.0475   -14.9554
+		
+		Residual Deviance: 4687.689 
+		AIC: 4695.689 
+	\end{verbnobox}			
+	
+	\normalsize
+	Now, when we look at the output from the ordered multinomial logit we need to interpret the estimated coefficients for our intercepts (or cutpoints) as well as the other covariates differently than the unordered model. So, a shift in REG from 0 to 1 (a one unit change in $x$) corresponds to an estimated change in the log odds of going from negative to no change AND from no change to positive by  $\approx$ 0.39, holding OIL constant at the observed mean. We can then make the same statement about OIL: going from 0 to 1 coincides with an estimated change in the log odds of going from negative to no change and no change to positive by  $\approx$ -0.19, holding REG constant at the observed mean. Notice in Figure~\ref{fig:cutpoints} that the cutpoints are the values in a latent continuous space in which we transition from negative to no change, or no change to positive. The coefficients for our covariates are now interpretable as linear associations across categories (i.e., a 1 unit increase in $x$ leads to a $\hat{\beta}$ shift in the log odds of going to the next category, rather than expressing a shift in the log odds of going from the baseline to another outcome category). Based on the model in part \#1, we should be skeptical of forcing an ordered structure on the outcome (since the covariates seem to be associated with any change, not any "ordered" change).\\
+	
+	
+	\begin{figure}[h!]\centering
+		\caption{\footnotesize Categorical cutpoints along latent dimension.}%\vspace{-1cm}
+		\label{fig:cutpoints}
+		
+		\includegraphics[width=.8\textwidth]{../../../../graphics/ologit-latent.png}\\
+	\end{figure}
+	
+\end{enumerate}
+\clearpage
+	\section*{Question 2}
+\vspace{.25cm}
+\noindent \emph{Consider the data set \texttt{MexicoMuniData.csv}, which includes municipal-level information from Mexico. The outcome of interest is the number of times the winning PAN presidential candidate in 2006 (\texttt{PAN.visits.06}) visited a district leading up to the 2009 federal elections, which is a count. Our main predictor of interest is whether the district was highly contested, or whether it was not (the PAN or their opponents have electoral security) in the previous federal elections during 2000 (\texttt{competitive.district}), which is binary (1=close/swing district, 0="safe seat"). We also include \texttt{marginality.06} (a measure of poverty) and \texttt{PAN.governor.06} (a dummy for whether the state has a PAN-affiliated governor) as additional control variables. }
+
+\begin{enumerate}
+	\item [(a)]
+	\emph{Run a Poisson regression because the outcome is a count variable. Is there evidence that PAN presidential candidates visit swing districts more? Provide a test statistic and p-value.}
+	
+	\lstinputlisting[language=R, firstline=63, lastline=67]{PS03_answerKey.R}  
+	
+	\begin{verbnobox}[\footnotesize]
+		Coefficients:
+		Estimate Std. Error z value Pr(>|z|)    
+(Intercept)          -3.81023    0.22209 -17.156   <2e-16 ***
+competitive.district -0.08135    0.17069  -0.477   0.6336    
+marginality.06       -2.08014    0.11734 -17.728   <2e-16 ***
+PAN.governor.06      -0.31158    0.16673  -1.869   0.0617 .    
+		---
+		Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+		
+		(Dispersion parameter for poisson family taken to be 1)
+		
+		Null deviance: 1433.83  on 2392  degrees of freedom
+		Residual deviance:  963.57  on 2389  degrees of freedom
+		AIC: 1255.9
+		
+		Number of Fisher Scoring iterations: 7
+	\end{verbnobox}			
+	
+	We can see above that we do not have a large enough test statistic (-0.477) to reject the null hypothesis that the estimated association between competitive.district and the number of visits from the winning PAN presidential candidate in 2006 is zero (p-value = 0.63 $>$ 0.05).\\
+	\newpage
+	\item [(b)]
+	\emph{Interpret the \texttt{marginality.06} and \texttt{PAN.governor.06} coefficients.}\\
+	
+	We can interpret the estimated coefficient of marginality.06 as: holding PAN governor and competitive.district constant at their observed means, a one unit increase in poverty leads to a change in the expected number of visits by a multiplicative factor of $\approx$ 0.125 (exp(-2.08014)). The same can be said of PAN governor: having a PAN governor versus having a non-PAN governor changes the expected number of visits by a multiplicative factor of $\approx$ 0.73 (exp(-0.31158)).\\
+	
+	\item [(c)]
+	\emph{Provide the estimated mean number of visits from the winning PAN presidential candidate for a hypothetical district that was competitive (\texttt{competitive.district}=1), had an average poverty level (\texttt{marginality.06} = 0), and a PAN governor (\texttt{PAN.governor.06}=1).}\\
+	
+	\lstinputlisting[language=R, firstline=69, lastline=74]{PS03_answerKey.R}  
+	
+	\begin{verbnobox}[\footnotesize]
+		0.01494818
+	\end{verbnobox}		
+	
+	The expected number of visits from the winning PAN candidate is $\approx$ 0.015 given that a district is competitive, had an average poverty level, and a PAN governor.\\
+\end{enumerate}
+
+
+
+\end{document}
